@@ -1,0 +1,37 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">{{pageTitle}}</h2>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group">
+        <label>Name</label>
+        <input formControlName="name" type="text" class="form-control" placeholder="name"
+               [ngClass]="{ 'is-invalid': f.name.touched && f.name.errors }">
+        <div *ngIf="f.name.touched && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Code (unique)</label>
+        <input formControlName="code" type="text" class="form-control" placeholder="code"
+               [ngClass]="{ 'is-invalid': f.code.touched && f.code.errors }">
+        <div *ngIf="f.code.touched && f.code.errors" class="invalid-feedback">
+          <div *ngIf="f.code.errors.required">Code is required</div>
+          <div *ngIf="f.code.errors.codeTaken">Code must be unique</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Price</label>
+        <input formControlName="price" type="number" class="form-control" placeholder="price"
+               [ngClass]="{ 'is-invalid': f.price.touched && f.price.errors }">
+        <div *ngIf="f.price.touched && f.price.errors" class="invalid-feedback">
+          <div *ngIf="f.price.errors.required">Price is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">{{buttonText}}</button>
+      </div>
+    </form>
+  </div>
+</div>
